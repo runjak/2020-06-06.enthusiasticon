@@ -33,11 +33,7 @@ We can use an exciting dualism between function and data to explore the problem 
 * Minds that go 'What was a permutation again?' or 'How would you even start solving that cube thing?'.
 * If after >46 years of rubiks cubes on earth you can still stand hearing more about them.
 
-## Additional notes
-
 ## Speaker information
 
-* Jakob Runge @sicarius
-  * Generally considers himself to be well privileged.
-  * Hasn't spoken at EnthusiastiCon in particular before, but at other conferences.
-  * Loves to fiddle with rubiks cubes.
+Jakob enjoys fiddling around with computers and loves the mechanical feel of twisting a rubiks cube.
+You can find him being a general nuisance on twitter as [@sicarius](https://twitter.com/sicarius).
