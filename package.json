@@ -1,0 +1,14 @@
+{
+  "name": "2020-06-06.enthusiasticon",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github:runjak/2020-06-06.enthusiasticon",
+  "author": "Jakob Runge <sicarius@g4t3.de>",
+  "license": "MIT",
+  "scripts": {
+    "start": "./node_modules/.bin/reveal-md slides.md --watch"
+  },
+  "dependencies": {
+    "reveal-md": "^3.4.7"
+  }
+}
