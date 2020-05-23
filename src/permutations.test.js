@@ -1,4 +1,4 @@
-import { id, combine, combines, equals, invert, perspectivePermutations, rotationPermutations } from './permutations';
+import { id, combine, combines, equals, invert, perspectivePermutations, rotationPermutations, isPerspectivePermutation, shuffle } from './permutations';
 
 describe('permutations', () => {
   describe('group laws', () => {
@@ -199,5 +199,24 @@ describe('permutations', () => {
         expect(hasInverted).toBe(true);
       });
     });
+  });
+
+  describe('isPerspectivePermutation', () => {
+    it('should correctly classify a truthy case', () => {
+      expect(isPerspectivePermutation('X')).toBe(true);
+    });
+ 
+    it('should correctly classify a falsy case', () => {
+      expect(isPerspectivePermutation("L'")).toBe(false);
+    });
+  });
+
+  describe('shuffle', () => {
+    it('should produce an expected shuffle', () => {
+      const actual = shuffle(['X','L','R','U']);
+      const expected = combines(perspectivePermutations.X, rotationPermutations.L, rotationPermutations.R, rotationPermutations.U);
+
+      expect(actual).toEqual(expected);
+    })
   });
 });

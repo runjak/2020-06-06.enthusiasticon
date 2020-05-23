@@ -119,3 +119,17 @@ export const rotationPermutations: RotationPermutations = {
   "U'": Uinverse,
   "D'": Dinverse,
 };
+
+export type PermutationName = PerspectivePermutationName | RotationPermutationName;
+
+export const isPerspectivePermutation = (name: PermutationName): name is PerspectivePermutationName => 
+   Object.keys(perspectivePermutations).includes(name);
+
+export const shuffle = (steps: Array<PermutationName>): Permutation =>
+  combines(id, ...steps.map((step: PermutationName): Permutation => {
+    if (isPerspectivePermutation(step)) {
+      return perspectivePermutations[step];
+    }
+
+    return rotationPermutations[step];
+  }));
