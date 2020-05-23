@@ -1,4 +1,10 @@
-import { Permutation } from "./permutations";
+import shuffleCollection from "lodash/shuffle";
+import {
+  Permutation,
+  PermutationName,
+  PerspectivePermutationName,
+  shuffle,
+} from "./permutations";
 
 export enum Color {
   white = "white",
@@ -29,15 +35,55 @@ const faceSlices: { [face in Face]: [number, number] } = {
   D: [45, 54],
 };
 
-export const colorsOnFace = (
-  colors: Array<Color>,
-  face: Face
-): Array<Color> => {
+export const colorsOnFace = (cube: Array<Color>, face: Face): Array<Color> => {
   const [start, end] = faceSlices[face];
-  return colors.slice(start, end);
+  return cube.slice(start, end);
 };
 
 export const applyPermutation = (
-  colors: Array<Color>,
+  cube: Array<Color>,
   permutation: Permutation
-): Array<Color> => permutation.map((i) => colors[i]);
+): Array<Color> => permutation.map((i) => cube[i]);
+
+export type ColorPredicate = (colors: Array<Color>) => boolean;
+
+export const faceMiddleHasColor = (
+  face: Face,
+  color: Color
+): ColorPredicate => (cube) => colorsOnFace(cube, face)[4] === color;
+
+const chooseFlip = (): Array<PerspectivePermutationName> => {
+  const paths: Array<Array<PerspectivePermutationName>> = [
+    ["X", "X"],
+    ["X'", "X'"],
+    ["Y", "Y"],
+    ["Y'", "Y'"],
+  ];
+
+  return shuffleCollection(paths)[0];
+};
+
+export const orientCube = (
+  colors: Array<Color>,
+  predicate: ColorPredicate
+): Array<PerspectivePermutationName> => {
+  if (predicate(colors)) {
+    return [];
+  }
+
+  const otherSides: Array<Array<PerspectivePermutationName>> = [
+    ["X"],
+    ["X'"],
+    ["Y"],
+    ["Y'"],
+    chooseFlip(),
+  ];
+
+  for (const path of otherSides) {
+    if (predicate(applyPermutation(colors, shuffle(path)))) {
+      return path;
+    }
+  }
+
+  return [];
+};

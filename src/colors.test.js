@@ -4,6 +4,8 @@ import {
   Face,
   colorsOnFace,
   applyPermutation,
+  faceMiddleHasColor,
+  orientCube,
 } from "./colors";
 import { shuffle } from "./permutations";
 
@@ -46,6 +48,32 @@ describe("colors", () => {
         Color.orange, Color.orange, Color.orange, Color.orange, Color.orange, Color.orange, Color.orange, Color.orange, Color.orange,
         Color.yellow, Color.yellow, Color.blue, Color.yellow, Color.yellow, Color.blue, Color.yellow, Color.yellow, Color.blue,
       ];
+
+      expect(actual).toEqual(expected);
+    });
+  });
+
+  describe("faceMiddleHasColor", () => {
+    it("should check that the solved case has white on top", () => {
+      const actual = faceMiddleHasColor("U", Color.white)(solvedColors);
+      expect(actual).toBe(true);
+    });
+
+    it("should spot the difference", () => {
+      const manipulatedColors = [...solvedColors];
+      manipulatedColors[4] = Color.red;
+
+      const actual = faceMiddleHasColor("U", Color.white)(manipulatedColors);
+      expect(actual).toBe(false);
+    });
+  });
+
+  describe("orientCube", () => {
+    it("should find a path to orient green to top", () => {
+      const predicate = faceMiddleHasColor("U", Color.green);
+
+      const expected = ["X"];
+      const actual = orientCube(solvedColors, predicate);
 
       expect(actual).toEqual(expected);
     });
