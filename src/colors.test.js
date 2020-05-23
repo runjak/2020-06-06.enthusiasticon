@@ -18,6 +18,7 @@ import {
   rotationBfs,
   countCorrectColors,
   improvesColors,
+  placeTopColors,
 } from "./colors";
 
 describe("colors", () => {
@@ -68,6 +69,16 @@ describe("colors", () => {
         Color.orange, Color.orange, Color.orange, Color.orange, Color.orange, Color.orange, Color.orange, Color.orange, Color.orange,
         Color.yellow, Color.yellow, Color.blue, Color.yellow, Color.yellow, Color.blue, Color.yellow, Color.yellow, Color.blue,
       ];
+
+      expect(actual).toEqual(expected);
+    });
+
+    it("should behave associative regarding shuffles", () => {
+      const expected = applyPermutation(solvedColors, shuffle(["F", "R"]));
+      const actual = applyPermutation(
+        applyPermutation(solvedColors, shuffle(["F"])),
+        shuffle(["R"])
+      );
 
       expect(actual).toEqual(expected);
     });
@@ -156,6 +167,38 @@ describe("colors", () => {
 
     it("should accept solvedColors", () => {
       expect(predicate(solvedColors)).toBe(true);
+    });
+  });
+
+  describe("placeTopColors", () => {
+    it("should find steps to get the desired top colors for a glider top", () => {
+      // prettier-ignore
+      const desiredTop = [
+      Color.red, Color.green, Color.blue,
+      Color.red, Color.red, Color.green,
+      Color.green, Color.green, Color.green,
+    ];
+      const steps = placeTopColors(solvedColors, desiredTop);
+
+      const resultingCube = applyPermutation(solvedColors, shuffle(steps));
+      const actualTop = colorsOnFace("U")(resultingCube);
+
+      expect(desiredTop).toEqual(actualTop);
+    });
+
+    it("should find steps to get the desired top colors for a superflip top", () => {
+      // prettier-ignore
+      const desiredTop = [
+      Color.white, Color.red, Color.white,
+      Color.blue, Color.white, Color.green,
+      Color.white, Color.orange, Color.white,
+    ];
+      const steps = placeTopColors(solvedColors, desiredTop);
+
+      const resultingCube = applyPermutation(solvedColors, shuffle(steps));
+      const actualTop = colorsOnFace("U")(resultingCube);
+
+      expect(desiredTop).toEqual(actualTop);
     });
   });
 });

@@ -50,7 +50,7 @@ describe("permutations", () => {
       const permutation = [0, 1, 3, 2];
 
       const expected = [2, 3, 7, 5];
-      const actual = combine(permutation, sample);
+      const actual = combine(sample, permutation);
 
       expect(actual).toEqual(expected);
     });

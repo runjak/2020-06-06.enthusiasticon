@@ -8,6 +8,7 @@ import {
   RotationPermutationName,
   rotationPermutations,
   combine,
+  PermutationName,
 } from "./permutations";
 
 export enum Color {
@@ -46,12 +47,17 @@ export const colorsOnFace = (face: Face): ColorSelector => (cube) => {
   return cube.slice(start, end);
 };
 
+const crossFromFace = (f: Array<Color>): Array<Color> => [
+  f[1],
+  f[3],
+  f[4],
+  f[5],
+  f[7],
+];
+
 export const colorsOnCross = (face: Face): ColorSelector => {
   const faceSelector = colorsOnFace(face);
-  return (cube) => {
-    const f = faceSelector(cube);
-    return [f[1], f[3], f[4], f[5], f[7]];
-  };
+  return (cube) => crossFromFace(faceSelector(cube));
 };
 
 export const applyPermutation = (
@@ -72,6 +78,8 @@ const chooseFlip = (): Array<PerspectivePermutationName> => {
     ["X'", "X'"],
     ["Y", "Y"],
     ["Y'", "Y'"],
+    ["Z", "Z"],
+    ["Z'", "Z'"],
   ];
 
   return shuffleCollection(paths)[0];
@@ -90,6 +98,8 @@ export const orientCube = (
     ["X'"],
     ["Y"],
     ["Y'"],
+    ["Z"],
+    ["Z'"],
     chooseFlip(),
   ];
 
@@ -99,7 +109,7 @@ export const orientCube = (
     }
   }
 
-  return [];
+  throw new Error("orientCube could not satisfy the given predicate.");
 };
 
 export const rotationBfs = (
@@ -157,4 +167,56 @@ export const improvesColors = (
 
   return (cube) =>
     countCorrectColors(desiredColors, colorSelector(cube)) > currentCount;
+};
+
+export const placeTopColors = (
+  cube: Array<Color>,
+  topColors: Array<Color>
+): Array<PermutationName> => {
+  if (topColors.length !== 9) {
+    return [];
+  }
+
+  const middleSteps = orientCube(
+    solvedColors,
+    faceMiddleHasColor("U", topColors[4])
+  );
+  let currentCube = applyPermutation(cube, shuffle(middleSteps));
+
+  const desiredCross = crossFromFace(topColors);
+  const selectCross = colorsOnCross("U");
+  let crossSteps: Array<PermutationName> = [];
+  while (countCorrectColors(desiredCross, selectCross(currentCube)) < 5) {
+    const crossRotations = rotationBfs(
+      currentCube,
+      improvesColors(desiredCross, selectCross(currentCube), selectCross),
+      4
+    );
+
+    if (crossRotations.length === 0) {
+      break;
+    }
+
+    crossSteps = [...crossSteps, ...crossRotations];
+    currentCube = applyPermutation(currentCube, shuffle(crossRotations));
+  }
+
+  const selectFace = colorsOnFace("U");
+  let faceSteps: Array<PermutationName> = [];
+  while (countCorrectColors(topColors, selectFace(currentCube)) < 9) {
+    const edgeRotations = rotationBfs(
+      currentCube,
+      improvesColors(topColors, selectFace(currentCube), selectFace),
+      6
+    );
+
+    if (edgeRotations.length === 0) {
+      break;
+    }
+
+    faceSteps = [...faceSteps, ...edgeRotations];
+    currentCube = applyPermutation(currentCube, shuffle(edgeRotations));
+  }
+
+  return [...middleSteps, ...crossSteps, ...faceSteps];
 };

@@ -5,7 +5,7 @@ export type Permutation = Array<number>;
 export const id: Permutation = range(3 * 3 * 6);
 
 export const combine = (xs: Permutation, ys: Permutation): Permutation =>
-  xs.map((x) => ys[x]);
+  ys.map((x) => xs[x]);
 
 export const combines = (
   x: Permutation,
