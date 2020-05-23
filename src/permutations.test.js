@@ -194,8 +194,9 @@ describe('permutations', () => {
       const xs = Object.values(rotationPermutations);
 
       xs.forEach((x) => {
-        // FIXME require invert
-        // FIXME require equal
+        const xInverted = invert(x);
+        const hasInverted = xs.some((y) => equals(y, xInverted));
+        expect(hasInverted).toBe(true);
       });
     });
   });
