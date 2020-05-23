@@ -1,14 +1,17 @@
-import range from 'lodash/range';
+import range from "lodash/range";
 
 export type Permutation = Array<number>;
 
 export const id: Permutation = range(3 * 3 * 6);
 
 export function combine(xs: Permutation, ys: Permutation): Permutation {
-  return xs.map(x => ys[x]);
+  return xs.map((x) => ys[x]);
 }
 
-export function combines(x: Permutation, ...xs: Array<Permutation>): Permutation {
+export function combines(
+  x: Permutation,
+  ...xs: Array<Permutation>
+): Permutation {
   if (xs.length === 0) {
     return x;
   }
@@ -49,8 +52,11 @@ export function invert(x: Permutation): Permutation {
 }
 
 export type PerspectivePermutationName = "X" | "X'" | "Y" | "Y'" | "Z" | "Z'";
-export type PerspectivePermutations = { [name in PerspectivePermutationName]: Permutation };
+export type PerspectivePermutations = {
+  [name in PerspectivePermutationName]: Permutation;
+};
 
+// prettier-ignore
 const X = [9, 10, 11, 12, 13, 14, 15, 16, 17
   , 45, 46, 47, 48, 49, 50, 51, 52, 53
   , 24, 21, 18, 25, 22, 19, 26, 23, 20
@@ -59,6 +65,7 @@ const X = [9, 10, 11, 12, 13, 14, 15, 16, 17
   , 35, 34, 33, 32, 31, 30, 29, 28, 27];
 const Xinverse = invert(X);
 
+// prettier-ignore
 const Z = [20, 23, 26, 19, 22, 25, 18, 21, 24
   , 11, 14, 17, 10, 13, 16, 9, 12, 15
   , 47, 50, 53, 46, 49, 52, 45, 48, 51
@@ -79,9 +86,13 @@ export const perspectivePermutations: PerspectivePermutations = {
   "Z'": Zinverse,
 };
 
+// prettier-ignore
 export type RotationPermutationName = "U" | "U'" | "L" | "L'" | "F" | "F'" | "R" | "R'" | "B" | "B'" | "D" | "D'";
-export type RotationPermutations = { [name in RotationPermutationName]: Permutation };
+export type RotationPermutations = {
+  [name in RotationPermutationName]: Permutation;
+};
 
+// prettier-ignore
 const R: Permutation = [0, 1, 11, 3, 4, 14, 6, 7, 17
   , 9, 10, 47, 12, 13, 50, 15, 16, 53
   , 24, 21, 18, 25, 22, 19, 26, 23, 20
@@ -120,16 +131,25 @@ export const rotationPermutations: RotationPermutations = {
   "D'": Dinverse,
 };
 
-export type PermutationName = PerspectivePermutationName | RotationPermutationName;
+export type PermutationName =
+  | PerspectivePermutationName
+  | RotationPermutationName;
 
-export const isPerspectivePermutation = (name: PermutationName): name is PerspectivePermutationName => 
-   Object.keys(perspectivePermutations).includes(name);
+export const isPerspectivePermutation = (
+  name: PermutationName
+): name is PerspectivePermutationName =>
+  Object.keys(perspectivePermutations).includes(name);
 
 export const shuffle = (steps: Array<PermutationName>): Permutation =>
-  combines(id, ...steps.map((step: PermutationName): Permutation => {
-    if (isPerspectivePermutation(step)) {
-      return perspectivePermutations[step];
-    }
+  combines(
+    id,
+    ...steps.map(
+      (step: PermutationName): Permutation => {
+        if (isPerspectivePermutation(step)) {
+          return perspectivePermutations[step];
+        }
 
-    return rotationPermutations[step];
-  }));
+        return rotationPermutations[step];
+      }
+    )
+  );

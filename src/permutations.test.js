@@ -1,22 +1,32 @@
-import { id, combine, combines, equals, invert, perspectivePermutations, rotationPermutations, isPerspectivePermutation, shuffle } from './permutations';
+import {
+  id,
+  combine,
+  combines,
+  equals,
+  invert,
+  perspectivePermutations,
+  rotationPermutations,
+  isPerspectivePermutation,
+  shuffle,
+} from "./permutations";
 
-describe('permutations', () => {
-  describe('group laws', () => {
+describe("permutations", () => {
+  describe("group laws", () => {
     const reverse = [...id].reverse();
 
-    it('it should have id as a left-combining identity element', () => {
+    it("it should have id as a left-combining identity element", () => {
       const actual = combine(id, reverse);
 
       expect(actual).toEqual(reverse);
     });
 
-    it('it should have id as a right-combining identity element', () => {
+    it("it should have id as a right-combining identity element", () => {
       const actual = combine(reverse, id);
 
       expect(actual).toEqual(reverse);
     });
 
-    it('should respect associativity', () => {
+    it("should respect associativity", () => {
       const xs = [0, 2, 1, 3];
       const ys = [0, 1, 3, 2];
       const zs = [1, 0, 2, 3];
@@ -27,14 +37,14 @@ describe('permutations', () => {
       expect(p1).toEqual(p2);
     });
 
-    it('should have inverse elements like the reverse permutation', () => {
+    it("should have inverse elements like the reverse permutation", () => {
       const expected = id;
       const actual = combine(combine(reverse, reverse), id);
 
       expect(actual).toEqual(expected);
     });
 
-    it('should apply permutations as expected', () => {
+    it("should apply permutations as expected", () => {
       const sample = [2, 3, 5, 7];
       const permutation = [0, 1, 3, 2];
 
@@ -45,15 +55,15 @@ describe('permutations', () => {
     });
   });
 
-  describe('combines()', () => {
-    it('should behave like identity given only one argument', () => {
+  describe("combines()", () => {
+    it("should behave like identity given only one argument", () => {
       const expected = [];
       const actual = combines(expected);
 
       expect(actual).toBe(expected);
     });
 
-    it('should combine the given arguments', () => {
+    it("should combine the given arguments", () => {
       const xs = [0, 2, 1, 3];
       const ys = [0, 1, 3, 2];
       const zs = [1, 0, 2, 3];
@@ -66,25 +76,25 @@ describe('permutations', () => {
   });
 
   describe("equals()", () => {
-    it('should return false for permutations of different length', () => {
+    it("should return false for permutations of different length", () => {
       const actual = equals([2, 3, 5, 7], [11, 13, 17, 19, 23]);
 
       expect(actual).toBe(false);
     });
 
-    it('should return false for different permutations', () => {
+    it("should return false for different permutations", () => {
       const actual = equals([2, 3, 5, 7], [11, 13, 17, 19]);
 
       expect(actual).toBe(false);
     });
 
-    it('should return true for the same permutation', () => {
+    it("should return true for the same permutation", () => {
       const actual = equals(id, id);
 
       expect(actual).toBe(true);
     });
 
-    it('should return true for equal permutations', () => {
+    it("should return true for equal permutations", () => {
       const actual = equals([1, 2, 3], [1, 2, 3]);
 
       expect(actual).toBe(true);
@@ -92,13 +102,13 @@ describe('permutations', () => {
   });
 
   describe("invert()", () => {
-    it('should return id given id', () => {
+    it("should return id given id", () => {
       const actual = invert(id);
 
       expect(actual).toEqual(id);
     });
 
-    it('should find the inverse to a given permutation', () => {
+    it("should find the inverse to a given permutation", () => {
       const [x, y, z, ...xs] = id;
       const p = [y, z, x, ...xs];
 
@@ -109,11 +119,16 @@ describe('permutations', () => {
     });
   });
 
-  describe('perspectivePermutations', () => {
+  describe("perspectivePermutations", () => {
     it("should have X permutation with cycle length 4", () => {
       const { X: permutation } = perspectivePermutations;
 
-      const actual = combines(permutation, permutation, permutation, permutation);
+      const actual = combines(
+        permutation,
+        permutation,
+        permutation,
+        permutation
+      );
 
       expect(actual).toEqual(id);
     });
@@ -121,7 +136,12 @@ describe('permutations', () => {
     it("should have X' permutation with cycle length 4", () => {
       const { "X'": permutation } = perspectivePermutations;
 
-      const actual = combines(permutation, permutation, permutation, permutation);
+      const actual = combines(
+        permutation,
+        permutation,
+        permutation,
+        permutation
+      );
 
       expect(actual).toEqual(id);
     });
@@ -129,7 +149,12 @@ describe('permutations', () => {
     it("should have Y permutation with cycle length 4", () => {
       const { Y: permutation } = perspectivePermutations;
 
-      const actual = combines(permutation, permutation, permutation, permutation);
+      const actual = combines(
+        permutation,
+        permutation,
+        permutation,
+        permutation
+      );
 
       expect(actual).toEqual(id);
     });
@@ -137,7 +162,12 @@ describe('permutations', () => {
     it("should have Y' permutation with cycle length 4", () => {
       const { "Y'": permutation } = perspectivePermutations;
 
-      const actual = combines(permutation, permutation, permutation, permutation);
+      const actual = combines(
+        permutation,
+        permutation,
+        permutation,
+        permutation
+      );
 
       expect(actual).toEqual(id);
     });
@@ -145,7 +175,12 @@ describe('permutations', () => {
     it("should have Z permutation with cycle length 4", () => {
       const { Z: permutation } = perspectivePermutations;
 
-      const actual = combines(permutation, permutation, permutation, permutation);
+      const actual = combines(
+        permutation,
+        permutation,
+        permutation,
+        permutation
+      );
 
       expect(actual).toEqual(id);
     });
@@ -153,7 +188,12 @@ describe('permutations', () => {
     it("should have Z' permutation with cycle length 4", () => {
       const { "Z'": permutation } = perspectivePermutations;
 
-      const actual = combines(permutation, permutation, permutation, permutation);
+      const actual = combines(
+        permutation,
+        permutation,
+        permutation,
+        permutation
+      );
 
       expect(actual).toEqual(id);
     });
@@ -183,14 +223,14 @@ describe('permutations', () => {
     });
   });
 
-  describe('rotationPermutations', () => {
-    it('should know 12 permutations', () => {
+  describe("rotationPermutations", () => {
+    it("should know 12 permutations", () => {
       const actual = Object.values(rotationPermutations).length;
 
       expect(actual).toBe(12);
     });
 
-    it('should have an inverse permutation for each permutation', () => {
+    it("should have an inverse permutation for each permutation", () => {
       const xs = Object.values(rotationPermutations);
 
       xs.forEach((x) => {
@@ -201,22 +241,27 @@ describe('permutations', () => {
     });
   });
 
-  describe('isPerspectivePermutation', () => {
-    it('should correctly classify a truthy case', () => {
-      expect(isPerspectivePermutation('X')).toBe(true);
+  describe("isPerspectivePermutation", () => {
+    it("should correctly classify a truthy case", () => {
+      expect(isPerspectivePermutation("X")).toBe(true);
     });
- 
-    it('should correctly classify a falsy case', () => {
+
+    it("should correctly classify a falsy case", () => {
       expect(isPerspectivePermutation("L'")).toBe(false);
     });
   });
 
-  describe('shuffle', () => {
-    it('should produce an expected shuffle', () => {
-      const actual = shuffle(['X','L','R','U']);
-      const expected = combines(perspectivePermutations.X, rotationPermutations.L, rotationPermutations.R, rotationPermutations.U);
+  describe("shuffle", () => {
+    it("should produce an expected shuffle", () => {
+      const actual = shuffle(["X", "L", "R", "U"]);
+      const expected = combines(
+        perspectivePermutations.X,
+        rotationPermutations.L,
+        rotationPermutations.R,
+        rotationPermutations.U
+      );
 
       expect(actual).toEqual(expected);
-    })
+    });
   });
 });
