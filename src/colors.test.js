@@ -4,12 +4,14 @@ import {
   shuffle,
   rotationPermutations,
   perspectivePermutations,
+  id,
 } from "./permutations";
 import {
   Color,
   solvedColors,
   Face,
   colorsOnFace,
+  colorsOnCross,
   applyPermutation,
   faceMiddleHasColor,
   orientCube,
@@ -42,6 +44,15 @@ describe("colors", () => {
         expect(colors.length).toBe(9);
         expect(colors.every((c) => c === color)).toBe(true);
       });
+    });
+  });
+
+  describe("colorsOnCross", () => {
+    it("should select the expected entries", () => {
+      const actual = colorsOnCross("U")(id);
+      const expected = [1, 3, 4, 5, 7];
+
+      expect(actual).toEqual(expected);
     });
   });
 

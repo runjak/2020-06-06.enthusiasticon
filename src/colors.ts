@@ -46,6 +46,14 @@ export const colorsOnFace = (face: Face): ColorSelector => (cube) => {
   return cube.slice(start, end);
 };
 
+export const colorsOnCross = (face: Face): ColorSelector => {
+  const faceSelector = colorsOnFace(face);
+  return (cube) => {
+    const f = faceSelector(cube);
+    return [f[1], f[3], f[4], f[5], f[7]];
+  };
+};
+
 export const applyPermutation = (
   cube: Array<Color>,
   permutation: Permutation
