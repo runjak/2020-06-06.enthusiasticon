@@ -15,7 +15,7 @@ import {
   orientCube,
   rotationBfs,
   countCorrectColors,
-  improvesFaceColors,
+  improvesColors,
 } from "./colors";
 
 describe("colors", () => {
@@ -37,7 +37,7 @@ describe("colors", () => {
       ];
 
       combinations.forEach(([face, color]) => {
-        const colors = colorsOnFace(solvedColors, face);
+        const colors = colorsOnFace(face)(solvedColors);
 
         expect(colors.length).toBe(9);
         expect(colors.every((c) => c === color)).toBe(true);
@@ -123,14 +123,15 @@ describe("colors", () => {
     });
   });
 
-  describe("improvesFaceColors", () => {
+  describe("improvesColors", () => {
     const manipulatedCube = [...solvedColors];
     manipulatedCube[9] = Color.red;
 
-    const predicate = improvesFaceColors(
-      "F",
-      colorsOnFace(solvedColors, "F"),
-      colorsOnFace(manipulatedCube, "F")
+    const selector = colorsOnFace("F");
+    const predicate = improvesColors(
+      selector(solvedColors),
+      selector(manipulatedCube),
+      selector
     );
 
     it("should reject a Y rotation", () => {

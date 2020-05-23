@@ -39,7 +39,9 @@ const faceSlices: { [face in Face]: [number, number] } = {
   D: [45, 54],
 };
 
-export const colorsOnFace = (cube: Array<Color>, face: Face): Array<Color> => {
+export type ColorSelector = (cube: Array<Color>) => Array<Color>;
+
+export const colorsOnFace = (face: Face): ColorSelector => (cube) => {
   const [start, end] = faceSlices[face];
   return cube.slice(start, end);
 };
@@ -54,7 +56,7 @@ export type ColorPredicate = (colors: Array<Color>) => boolean;
 export const faceMiddleHasColor = (
   face: Face,
   color: Color
-): ColorPredicate => (cube) => colorsOnFace(cube, face)[4] === color;
+): ColorPredicate => (cube) => colorsOnFace(face)(cube)[4] === color;
 
 const chooseFlip = (): Array<PerspectivePermutationName> => {
   const paths: Array<Array<PerspectivePermutationName>> = [
@@ -138,13 +140,13 @@ export const countCorrectColors = (
     ([desired, actual]) => desired === actual
   ).length;
 
-export const improvesFaceColors = (
-  face: Face,
-  desiredFace: Array<Color>,
-  currentFace: Array<Color>
+export const improvesColors = (
+  desiredColors: Array<Color>,
+  currentColors: Array<Color>,
+  colorSelector: ColorSelector
 ): ColorPredicate => {
-  const currentCount = countCorrectColors(desiredFace, currentFace);
+  const currentCount = countCorrectColors(desiredColors, currentColors);
 
   return (cube) =>
-    countCorrectColors(desiredFace, colorsOnFace(cube, face)) > currentCount;
+    countCorrectColors(desiredColors, colorSelector(cube)) > currentCount;
 };
