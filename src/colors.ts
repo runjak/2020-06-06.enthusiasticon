@@ -137,3 +137,14 @@ export const countCorrectColors = (
   zip(desiredColors, actualColors).filter(
     ([desired, actual]) => desired === actual
   ).length;
+
+export const improvesFaceColors = (
+  face: Face,
+  desiredFace: Array<Color>,
+  currentFace: Array<Color>
+): ColorPredicate => {
+  const currentCount = countCorrectColors(desiredFace, currentFace);
+
+  return (cube) =>
+    countCorrectColors(desiredFace, colorsOnFace(cube, face)) > currentCount;
+};

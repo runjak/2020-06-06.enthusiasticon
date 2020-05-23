@@ -1,6 +1,10 @@
 import zip from "lodash/zip";
 
-import { shuffle } from "./permutations";
+import {
+  shuffle,
+  rotationPermutations,
+  perspectivePermutations,
+} from "./permutations";
 import {
   Color,
   solvedColors,
@@ -11,6 +15,7 @@ import {
   orientCube,
   rotationBfs,
   countCorrectColors,
+  improvesFaceColors,
 } from "./colors";
 
 describe("colors", () => {
@@ -115,6 +120,30 @@ describe("colors", () => {
       const actualColors = [Color.orange, Color.green, Color.white];
 
       expect(countCorrectColors(desiredColors, actualColors)).toBe(1);
+    });
+  });
+
+  describe("improvesFaceColors", () => {
+    const manipulatedCube = [...solvedColors];
+    manipulatedCube[9] = Color.red;
+
+    const predicate = improvesFaceColors(
+      "F",
+      colorsOnFace(solvedColors, "F"),
+      colorsOnFace(manipulatedCube, "F")
+    );
+
+    it("should reject a Y rotation", () => {
+      const testCube = applyPermutation(
+        solvedColors,
+        perspectivePermutations.Y
+      );
+
+      expect(predicate(testCube)).toBe(false);
+    });
+
+    it("should accept solvedColors", () => {
+      expect(predicate(solvedColors)).toBe(true);
     });
   });
 });
