@@ -4,22 +4,21 @@ export type Permutation = Array<number>;
 
 export const id: Permutation = range(3 * 3 * 6);
 
-export function combine(xs: Permutation, ys: Permutation): Permutation {
-  return xs.map((x) => ys[x]);
-}
+export const combine = (xs: Permutation, ys: Permutation): Permutation =>
+  xs.map((x) => ys[x]);
 
-export function combines(
+export const combines = (
   x: Permutation,
   ...xs: Array<Permutation>
-): Permutation {
+): Permutation => {
   if (xs.length === 0) {
     return x;
   }
 
   return xs.reduce((y, z) => combine(y, z), x);
-}
+};
 
-export function equals(x: Permutation, y: Permutation): boolean {
+export const equals = (x: Permutation, y: Permutation): boolean => {
   if (x === y) {
     return true;
   }
@@ -35,9 +34,9 @@ export function equals(x: Permutation, y: Permutation): boolean {
   }
 
   return true;
-}
+};
 
-export function invert(x: Permutation): Permutation {
+export const invert = (x: Permutation): Permutation => {
   let y = x;
 
   while (true) {
@@ -49,7 +48,7 @@ export function invert(x: Permutation): Permutation {
 
     y = z;
   }
-}
+};
 
 export type PerspectivePermutationName = "X" | "X'" | "Y" | "Y'" | "Z" | "Z'";
 export type PerspectivePermutations = {
