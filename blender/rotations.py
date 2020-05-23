@@ -129,7 +129,8 @@ def shuffle(cube, rotationNames, keyDelta):
 
 superflip = ["R", "L", "U", "U", "F", "U'", "D", "F", "F", "R", "R", "B", "B", "L", "U", "U", "F'", "B'", "U", "R", "R", "D", "F", "F", "U", "R", "R", "U"]
 
-setKeyframe(1)
+# setKeyframe(1)
 currentCube = newCube('cube', (0, 0, 0))
-keyCubelets(currentCube.all_objects)
-shuffle(currentCube, superflip + superflip, 8)
+rotations['R'](currentCube)
+# keyCubelets(currentCube.all_objects)
+# shuffle(currentCube, superflip + superflip, 8)
