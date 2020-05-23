@@ -1,4 +1,6 @@
 import shuffleCollection from "lodash/shuffle";
+import zip from "lodash/zip";
+
 import {
   Permutation,
   PerspectivePermutationName,
@@ -127,3 +129,11 @@ export const rotationBfs = (
 
   return [];
 };
+
+export const countCorrectColors = (
+  desiredColors: Array<Color>,
+  actualColors: Array<Color>
+): number =>
+  zip(desiredColors, actualColors).filter(
+    ([desired, actual]) => desired === actual
+  ).length;

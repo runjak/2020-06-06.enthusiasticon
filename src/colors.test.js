@@ -10,6 +10,7 @@ import {
   faceMiddleHasColor,
   orientCube,
   rotationBfs,
+  countCorrectColors,
 } from "./colors";
 
 describe("colors", () => {
@@ -105,6 +106,15 @@ describe("colors", () => {
       const expectedPath = ["L", "F"];
 
       expect(actual).toEqual(expectedPath);
+    });
+  });
+
+  describe("countCorrectColors", () => {
+    it("should count the correctly placed colors", () => {
+      const desiredColors = [Color.red, Color.green, Color.blue];
+      const actualColors = [Color.orange, Color.green, Color.white];
+
+      expect(countCorrectColors(desiredColors, actualColors)).toBe(1);
     });
   });
 });
