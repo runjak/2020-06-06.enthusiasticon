@@ -1,9 +1,11 @@
 import shuffleCollection from "lodash/shuffle";
 import {
   Permutation,
-  PermutationName,
   PerspectivePermutationName,
   shuffle,
+  RotationPermutationName,
+  rotationPermutations,
+  combine,
 } from "./permutations";
 
 export enum Color {
@@ -83,6 +85,44 @@ export const orientCube = (
     if (predicate(applyPermutation(colors, shuffle(path)))) {
       return path;
     }
+  }
+
+  return [];
+};
+
+export const rotationBfs = (
+  cube: Array<Color>,
+  predicate: ColorPredicate,
+  depth: number
+): Array<RotationPermutationName> => {
+  type RotationPath = Array<RotationPermutationName>;
+  type States = Array<[RotationPath, Permutation]>;
+
+  let states: States = Object.entries(
+    rotationPermutations
+  ).map(([name, permutation]) => [
+    [name as RotationPermutationName],
+    permutation,
+  ]);
+
+  for (let i = 0; i < depth; i++) {
+    // Test current states:
+    for (const [path, permutation] of states) {
+      if (predicate(applyPermutation(cube, permutation))) {
+        return path;
+      }
+    }
+
+    // Generate next states:
+    states = states.flatMap(([path, permutation]) =>
+      Object.entries(rotationPermutations).map(([nextStep, nextPermutation]): [
+        RotationPath,
+        Permutation
+      ] => [
+        [...path, nextStep as RotationPermutationName],
+        combine(permutation, nextPermutation),
+      ])
+    );
   }
 
   return [];

@@ -1,3 +1,6 @@
+import zip from "lodash/zip";
+
+import { shuffle } from "./permutations";
 import {
   Color,
   solvedColors,
@@ -6,8 +9,8 @@ import {
   applyPermutation,
   faceMiddleHasColor,
   orientCube,
+  rotationBfs,
 } from "./colors";
-import { shuffle } from "./permutations";
 
 describe("colors", () => {
   describe("solvedColors", () => {
@@ -76,6 +79,32 @@ describe("colors", () => {
       const actual = orientCube(solvedColors, predicate);
 
       expect(actual).toEqual(expected);
+    });
+  });
+
+  describe("rotationBfs", () => {
+    const shufflePath = ["F'", "L'"];
+    const shuffledCube = applyPermutation(solvedColors, shuffle(shufflePath));
+
+    const predicate = (cube) =>
+      zip(cube, solvedColors).every(([x, y]) => x === y);
+
+    it("should be tested with a sane predicate", () => {
+      expect(predicate(solvedColors)).toBe(true);
+      expect(predicate(shuffledCube)).toBe(false);
+    });
+
+    it("should not find the solution with depth = 1", () => {
+      const actual = rotationBfs(shuffledCube, predicate, 1);
+
+      expect(actual).toEqual([]);
+    });
+
+    it("should find the solution with depth = 2", () => {
+      const actual = rotationBfs(shuffledCube, predicate, 2);
+      const expectedPath = ["L", "F"];
+
+      expect(actual).toEqual(expectedPath);
     });
   });
 });
