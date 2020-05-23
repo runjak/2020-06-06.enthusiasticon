@@ -8,6 +8,7 @@ import {
   rotationPermutations,
   isPerspectivePermutation,
   shuffle,
+  reverse,
 } from "./permutations";
 
 describe("permutations", () => {
@@ -262,6 +263,21 @@ describe("permutations", () => {
       );
 
       expect(actual).toEqual(expected);
+    });
+  });
+
+  describe("reverse", () => {
+    it("should produce a series of steps to revert a shuffle", () => {
+      const steps = ["R", "X'", "R", "F'"];
+      const forwardPermutation = shuffle(steps);
+
+      const reversedSteps = reverse(steps);
+      const reversedPermutation = shuffle(reversedSteps);
+
+      const expectedSteps = ["F", "R'", "X", "R'"];
+
+      expect(reversedSteps).toEqual(expectedSteps);
+      expect(combine(forwardPermutation, reversedPermutation)).toEqual(id);
     });
   });
 });

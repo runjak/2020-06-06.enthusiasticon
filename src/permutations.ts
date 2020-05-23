@@ -152,3 +152,32 @@ export const shuffle = (steps: Array<PermutationName>): Permutation =>
       }
     )
   );
+
+export const reverse = (
+  steps: Array<PermutationName>
+): Array<PermutationName> =>
+  [...steps].reverse().map(
+    (name: PermutationName): PermutationName => {
+      if (isPerspectivePermutation(name)) {
+        const desiredPermutation = invert(perspectivePermutations[name]);
+        for (const [inverseName, candidatePermutation] of Object.entries(
+          perspectivePermutations
+        )) {
+          if (equals(desiredPermutation, candidatePermutation)) {
+            return inverseName as PermutationName;
+          }
+        }
+      } else {
+        const desiredPermutation = invert(rotationPermutations[name]);
+        for (const [inverseName, candidatePermutation] of Object.entries(
+          rotationPermutations
+        )) {
+          if (equals(desiredPermutation, candidatePermutation)) {
+            return inverseName as PermutationName;
+          }
+        }
+      }
+
+      throw new Error(`Irreversivle permutation: ${name}`);
+    }
+  );
