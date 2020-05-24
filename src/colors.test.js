@@ -82,6 +82,22 @@ describe("colors", () => {
 
       expect(actual).toEqual(expected);
     });
+
+    it("should give the correct top face for a shimple shuffle", () => {
+      const steps = ["F", "R", "B", "L"];
+
+      const actual = colorsOnFace("U")(
+        applyPermutation(solvedColors, shuffle(steps))
+      );
+      // prettier-ignore
+      const expected = [
+        Color.blue, Color.red, Color.red,
+        Color.blue, Color.white, Color.green,
+        Color.orange, Color.orange, Color.green,
+      ];
+
+      expect(actual).toEqual(expected);
+    });
   });
 
   describe("faceMiddleHasColor", () => {
@@ -156,10 +172,10 @@ describe("colors", () => {
       selector
     );
 
-    it("should reject a Y rotation", () => {
+    it("should reject a Z rotation", () => {
       const testCube = applyPermutation(
         solvedColors,
-        perspectivePermutations.Y
+        perspectivePermutations.Z
       );
 
       expect(predicate(testCube)).toBe(false);

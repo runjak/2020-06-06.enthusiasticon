@@ -128,9 +128,11 @@ def shuffle(cube, rotationNames, keyDelta):
 
 
 superflip = ["R", "L", "U", "U", "F", "U'", "D", "F", "F", "R", "R", "B", "B", "L", "U", "U", "F'", "B'", "U", "R", "R", "D", "F", "F", "U", "R", "R", "U"]
+glider = ['Y',  'R',  "L'", 'U', "F'", 'R',  'F',  'F', 'L',  "F'", 'R',  "D'", "R'"]
+superflipTop = ['R',  'F',  'L', 'B', 'L',  'R',  'B', 'U', 'F',  "U'", 'R', 'B', "F'", "R'", 'F', "B'"]
+around = ['F','R','B','L']
 
-# setKeyframe(1)
+setKeyframe(1)
 currentCube = newCube('cube', (0, 0, 0))
-rotations['R'](currentCube)
-# keyCubelets(currentCube.all_objects)
-# shuffle(currentCube, superflip + superflip, 8)
+keyCubelets(currentCube.all_objects)
+shuffle(currentCube, glider, 8)

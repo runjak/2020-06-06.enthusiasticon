@@ -1,4 +1,3 @@
-import shuffleCollection from "lodash/shuffle";
 import zip from "lodash/zip";
 
 import {
@@ -72,19 +71,6 @@ export const faceMiddleHasColor = (
   color: Color
 ): ColorPredicate => (cube) => colorsOnFace(face)(cube)[4] === color;
 
-const chooseFlip = (): Array<PerspectivePermutationName> => {
-  const paths: Array<Array<PerspectivePermutationName>> = [
-    ["X", "X"],
-    ["X'", "X'"],
-    ["Y", "Y"],
-    ["Y'", "Y'"],
-    ["Z", "Z"],
-    ["Z'", "Z'"],
-  ];
-
-  return shuffleCollection(paths)[0];
-};
-
 export const orientCube = (
   colors: Array<Color>,
   predicate: ColorPredicate
@@ -100,7 +86,12 @@ export const orientCube = (
     ["Y'"],
     ["Z"],
     ["Z'"],
-    chooseFlip(),
+    ["X", "X"],
+    ["X'", "X'"],
+    ["Y", "Y"],
+    ["Y'", "Y'"],
+    ["Z", "Z"],
+    ["Z'", "Z'"],
   ];
 
   for (const path of otherSides) {

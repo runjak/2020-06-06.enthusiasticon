@@ -67,7 +67,7 @@ const X = [
 const Xinverse = invert(X);
 
 // prettier-ignore
-const Z = [
+const Y = [
   20, 23, 26, 19, 22, 25, 18, 21, 24,
   11, 14, 17, 10, 13, 16,  9, 12, 15,
   47, 50, 53, 46, 49, 52, 45, 48, 51,
@@ -75,10 +75,10 @@ const Z = [
    2,  5,  8,  1,  4,  7,  0,  3,  6,
   38, 41, 44, 37, 40, 43, 36, 39, 42,
 ];
-const Zinverse = invert(Z);
-
-const Y = combine(Z, combine(X, Zinverse));
 const Yinverse = invert(Y);
+
+const Z = combine(Y, combine(X, Yinverse));
+const Zinverse = invert(Z);
 
 export const perspectivePermutations: PerspectivePermutations = {
   X,
@@ -106,19 +106,19 @@ const R: Permutation = [
 ];
 const Rinverse = invert(R);
 
-const F = combines(Y, R, Yinverse);
+const F = combines(Z, R, Zinverse);
 const Finverse = invert(F);
 
-const L = combines(Y, F, Yinverse);
+const L = combines(Z, F, Zinverse);
 const Linverse = invert(L);
 
-const B = combines(Y, L, Yinverse);
+const B = combines(Z, L, Zinverse);
 const Binverse = invert(B);
 
-const U = combines(Z, R, Zinverse);
+const U = combines(Yinverse, R, Y);
 const Uinverse = invert(U);
 
-const D = combines(Zinverse, R, Z);
+const D = combines(Y, R, Yinverse);
 const Dinverse = invert(D);
 
 export const rotationPermutations: RotationPermutations = {
