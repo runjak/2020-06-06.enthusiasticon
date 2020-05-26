@@ -10,6 +10,20 @@ revealOptions:
 
 ---
 
+<video autoplay="true" loop="true" muted="true" width="640">
+   <source src="rendered/superflip.mp4" type="video/mp4">
+   Your browser does not support the video tag.
+</video>
+
+---
+
+<video autoplay="true" loop="true" muted="true" width="640">
+   <source src="rendered/chaotikum-fail.mp4" type="video/mp4">
+   Your browser does not support the video tag.
+</video>
+
+---
+
 <!-- 1 min: Opening -->
 
 * Hi - I like rubiks cubes 👋
