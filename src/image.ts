@@ -100,8 +100,8 @@ export type Tile = { x: number; y: number; colors: Array<Color> };
 export const tile = ({ data, width, height }: Quantified): Array<Tile> => {
   let tiles: Array<Tile> = [];
 
-  for (let y = 0; y + 3 < height; y += 3) {
-    for (let x = 0; x + 3 < width; x += 3) {
+  for (let y = 0; y + 3 <= height; y += 3) {
+    for (let x = 0; x + 3 <= width; x += 3) {
       const offset = y * width + x;
       const colors = [
         ...data.slice(offset, offset + 3),
@@ -116,33 +116,40 @@ export const tile = ({ data, width, height }: Quantified): Array<Tile> => {
   return tiles;
 };
 
-export type ImageCube = { x: number; y: number; cube: Array<PermutationName> };
+export type ImageCube = {
+  x: number;
+  y: number;
+  permutations: Array<PermutationName>;
+};
 export type Animation = {
-  keyframeDelta: number;
+  keyDelta: number;
   cubes: Array<ImageCube>;
 };
 
 export const imageToAnimation = (
   rawPng: Buffer,
-  keyframeDelta: number,
+  keyDelta: number,
   startColors: (x: number, y: number) => Array<Color>
 ): Animation => {
-  const tiles = tile(quantify(rawPng)).slice(0, 3); // FIXME no slice
+  const tiles = tile(quantify(rawPng));
   const cubes = tiles.map(({ x, y, colors }) => ({
     x,
     y,
-    cube: placeTopColors(startColors(x, y), colors),
+    permutations: placeTopColors(startColors(x, y), colors),
   }));
 
-  return { keyframeDelta, cubes };
+  return { keyDelta, cubes };
 };
 
 export const animateSingleImage = async (
   source: string,
   target: string,
-  keyframeDelta: number
+  keyDelta: number
 ) => {
   const rawPng = await readFile(source);
-  const animation = imageToAnimation(rawPng, 8, () => solvedColors);
+  const animation = imageToAnimation(rawPng, keyDelta, (x, y) => {
+    console.log(`startCube for (${x}, ${y})`);
+    return solvedColors;
+  });
   await writeFile(target, animation);
 };

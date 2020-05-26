@@ -1,3 +1,4 @@
+import last from "lodash/last";
 import zip from "lodash/zip";
 
 import {
@@ -8,6 +9,7 @@ import {
   rotationPermutations,
   combine,
   PermutationName,
+  inverseRotationName,
 } from "./permutations";
 
 export enum Color {
@@ -127,18 +129,19 @@ export const rotationBfs = (
     }
 
     // Generate next states:
-    states = states.flatMap(([path, permutation]) =>
-      Object.entries(rotationPermutations).map(([nextStep, nextPermutation]): [
-        RotationPath,
-        Permutation
-      ] => [
-        [...path, nextStep as RotationPermutationName],
-        combine(permutation, nextPermutation),
-      ])
-    );
+    states = states.flatMap(([path, permutation]) => {
+      const lastStep = last(path) || "";
+      return Object.entries(rotationPermutations)
+        .filter(([nextStep]) => !inverseRotationName(lastStep, nextStep))
+        .map(([nextStep, nextPermutation]): [RotationPath, Permutation] => [
+          [...path, nextStep as RotationPermutationName],
+          combine(permutation, nextPermutation),
+        ]);
+    });
   }
 
   return [];
+  throw new Error("No solution found with rotationBfs");
 };
 
 export const countCorrectColors = (
@@ -198,7 +201,7 @@ export const placeTopColors = (
     const edgeRotations = rotationBfs(
       currentCube,
       improvesColors(topColors, selectFace(currentCube), selectFace),
-      6
+      4 // FIXME better faces pls!
     );
 
     if (edgeRotations.length === 0) {
