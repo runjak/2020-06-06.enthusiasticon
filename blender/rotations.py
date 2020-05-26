@@ -143,9 +143,12 @@ def performAnimation(fileName):
         keyCubelets(currentCube.all_objects)
         shuffle(currentCube, cube['permutations'], keyDelta)
         maxFrame = max(maxFrame, currentKeyframe())
+        for cubelet in currentCube.all_objects:
+            cubelet.select_set(True)
     if keyDelta:
         bpy.data.scenes['Scene'].frame_end = maxFrame
         setKeyframe(1)
+    bpy.ops.view3d.camera_to_view_selected()
 
 
 superflip = ["R", "L", "U", "U", "F", "U'", "D", "F", "F", "R", "R", "B", "B",
@@ -157,8 +160,4 @@ superflipTop = ['R',  'F',  'L', 'B', 'L',  'R',  'B',
 around = ['F', 'R', 'B', 'L']
 
 
-#setKeyframe(1)
-#currentCube = newCube('cube', (0, 0, 0))
-#keyCubelets(currentCube.all_objects)
-#shuffle(currentCube, glider, 8)
 performAnimation('/tmp/enthusiasticon_27.json')
