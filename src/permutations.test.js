@@ -9,6 +9,7 @@ import {
   isPerspectivePermutation,
   shuffle,
   reverse,
+  inverseRotationName,
 } from "./permutations";
 
 describe("permutations", () => {
@@ -278,6 +279,16 @@ describe("permutations", () => {
 
       expect(reversedSteps).toEqual(expectedSteps);
       expect(combine(forwardPermutation, reversedPermutation)).toEqual(id);
+    });
+  });
+
+  describe("inverseRotationName", () => {
+    it("should correctly identify an inverse case", () => {
+      expect(inverseRotationName("F", "F'")).toBe(true);
+    });
+
+    it("should correctly reject a wrong case", () => {
+      expect(inverseRotationName("F", "R")).toBe(false);
     });
   });
 });

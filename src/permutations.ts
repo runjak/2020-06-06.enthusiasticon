@@ -187,3 +187,24 @@ export const reverse = (
       throw new Error(`Irreversivle permutation: ${name}`);
     }
   );
+
+type InverseRotationMap = {
+  [name in RotationPermutationName]: RotationPermutationName;
+};
+const inverseRotations: InverseRotationMap = ((): InverseRotationMap => {
+  const namesAndRotations = Object.entries(rotationPermutations);
+
+  const pairs = namesAndRotations.map(([name, permutation]) => {
+    const [[inverseName]] = namesAndRotations.filter(([, candidate]) =>
+      equals(combine(permutation, candidate), id)
+    );
+    return [name, inverseName];
+  });
+
+  return Object.fromEntries(pairs);
+})();
+
+export const inverseRotationName = (
+  name: string,
+  inverseName: string
+): boolean => inverseRotations[name as RotationPermutationName] === inverseName;
