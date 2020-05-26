@@ -2,6 +2,7 @@ import bpy
 import json
 import math
 import mathutils
+import sys
 
 cubeTemplate = bpy.data.collections['cube-template']
 cubeletSize = 1.02
@@ -160,4 +161,15 @@ superflipTop = ['R',  'F',  'L', 'B', 'L',  'R',  'B',
 around = ['F', 'R', 'B', 'L']
 
 
-performAnimation('/tmp/enthusiasticon_27.json')
+argv = sys.argv
+argv = argv[argv.index("--") + 1:]
+
+if len(argv) == 2:
+    animationJson = argv[0]
+    targetBlend = argv[1]
+    print('Reading ' + animationJson + ', saving it as ' + targetBlend)
+    performAnimation(animationJson)
+    bpy.ops.wm.save_as_mainfile(filepath=targetBlend)
+else:
+    print('please supply arguments: $animation.json $target.blend')
+
