@@ -9,7 +9,8 @@
     "slides": "./node_modules/.bin/reveal-md slides.md --watch",
     "test": "./node_modules/.bin/jest",
     "prettier": "./node_modules/.bin/prettier --write src",
-    "build": "./node_modules/.bin/tsc"
+    "build": "./node_modules/.bin/tsc",
+    "animateImage": "node dist/animateImage.js"
   },
   "dependencies": {
     "image-q": "^2.1.2",
