@@ -135,13 +135,16 @@ def performAnimation(fileName):
         animationJson = animationFile.read()
     animationData = json.loads(animationJson)
     keyDelta = animationData['keyDelta']
-    newCube('cube-' + str(keyDelta), (cubeSize, 0, 0))
-    return
+    maxFrame = 1
     for cube in animationData['cubes']:
         x, y = cube['x'], cube['y']
         setKeyframe(1)
-        currentCube = newCube('cube-'+x+'-'+y, (x * cubeSize, y * cubeSize, 0))
+        currentCube = newCube('cube-'+str(x)+'-'+str(y), (-x * cubeSize, y * cubeSize, 0))
         shuffle(currentCube, cube['permutations'], keyDelta)
+        maxFrame = max(maxFrame, currentKeyframe())
+    if keyDelta:
+        bpy.data.scenes['Scene'].frame_end = maxFrame
+        setKeyframe(1)
 
 
 superflip = ["R", "L", "U", "U", "F", "U'", "D", "F", "F", "R", "R", "B", "B",
@@ -153,8 +156,8 @@ superflipTop = ['R',  'F',  'L', 'B', 'L',  'R',  'B',
 around = ['F', 'R', 'B', 'L']
 
 
-# setKeyframe(1)
+#setKeyframe(1)
 #currentCube = newCube('cube', (0, 0, 0))
-# keyCubelets(currentCube.all_objects)
+#keyCubelets(currentCube.all_objects)
 #shuffle(currentCube, glider, 8)
-performAnimation('/tmp/chaotikum.json')
+performAnimation('/tmp/enthusiasticon_27.json')
