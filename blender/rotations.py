@@ -140,6 +140,7 @@ def performAnimation(fileName):
         x, y = cube['x'], cube['y']
         setKeyframe(1)
         currentCube = newCube('cube-'+str(x)+'-'+str(y), (-x * cubeSize, y * cubeSize, 0))
+        keyCubelets(currentCube.all_objects)
         shuffle(currentCube, cube['permutations'], keyDelta)
         maxFrame = max(maxFrame, currentKeyframe())
     if keyDelta:
