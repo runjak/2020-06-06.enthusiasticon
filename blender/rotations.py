@@ -7,6 +7,7 @@ cubeTemplate = bpy.data.collections['cube-template']
 cubeletSize = 1.02
 cubeSize = 3 * cubeletSize
 
+
 def currentKeyframe():
     return bpy.data.scenes['Scene'].frame_current
 
@@ -17,7 +18,8 @@ def setKeyframe(frame):
 
 def keyCubelet(cubelet):
     cubelet.keyframe_insert(data_path='location', frame=currentKeyframe())
-    cubelet.keyframe_insert(data_path='rotation_quaternion', frame=currentKeyframe())
+    cubelet.keyframe_insert(
+        data_path='rotation_quaternion', frame=currentKeyframe())
 
 
 def keyCubelets(cubelets):
@@ -112,7 +114,8 @@ rotations = {
 
 
 def rotationsDemo():
-    rs = ["X", "X'", "Y", "Y'", "Z", "Z'", "U", "U'", "D", "D'", "F", "F'", "B", "B'", "R", "R'", "L", "L'"]
+    rs = ["X", "X'", "Y", "Y'", "Z", "Z'", "U", "U'", "D",
+          "D'", "F", "F'", "B", "B'", "R", "R'", "L", "L'"]
     for i, r in enumerate(rs):
         cube = newCube('cube', (i * (cubeSize + 0.3), 0, 0))
         rotations[r](cube)
@@ -127,12 +130,31 @@ def shuffle(cube, rotationNames, keyDelta):
             keyDelta and keyCubelets(cube.all_objects)
 
 
-superflip = ["R", "L", "U", "U", "F", "U'", "D", "F", "F", "R", "R", "B", "B", "L", "U", "U", "F'", "B'", "U", "R", "R", "D", "F", "F", "U", "R", "R", "U"]
-glider = ['Y',  'R',  "L'", 'U', "F'", 'R',  'F',  'F', 'L',  "F'", 'R',  "D'", "R'"]
-superflipTop = ['R',  'F',  'L', 'B', 'L',  'R',  'B', 'U', 'F',  "U'", 'R', 'B', "F'", "R'", 'F', "B'"]
-around = ['F','R','B','L']
+def performAnimation(fileName):
+    with open(fileName, 'r') as animationFile:
+        animationJson = animationFile.read()
+    animationData = json.loads(animationJson)
+    keyDelta = animationData['keyDelta']
+    newCube('cube-' + str(keyDelta), (cubeSize, 0, 0))
+    return
+    for cube in animationData['cubes']:
+        x, y = cube['x'], cube['y']
+        setKeyframe(1)
+        currentCube = newCube('cube-'+x+'-'+y, (x * cubeSize, y * cubeSize, 0))
+        shuffle(currentCube, cube['permutations'], keyDelta)
 
-setKeyframe(1)
-currentCube = newCube('cube', (0, 0, 0))
-keyCubelets(currentCube.all_objects)
-shuffle(currentCube, glider, 8)
+
+superflip = ["R", "L", "U", "U", "F", "U'", "D", "F", "F", "R", "R", "B", "B",
+             "L", "U", "U", "F'", "B'", "U", "R", "R", "D", "F", "F", "U", "R", "R", "U"]
+glider = ['Y',  'R',  "L'", 'U', "F'", 'R',
+          'F',  'F', 'L',  "F'", 'R',  "D'", "R'"]
+superflipTop = ['R',  'F',  'L', 'B', 'L',  'R',  'B',
+                'U', 'F',  "U'", 'R', 'B', "F'", "R'", 'F', "B'"]
+around = ['F', 'R', 'B', 'L']
+
+
+# setKeyframe(1)
+#currentCube = newCube('cube', (0, 0, 0))
+# keyCubelets(currentCube.all_objects)
+#shuffle(currentCube, glider, 8)
+performAnimation('/tmp/chaotikum.json')
