@@ -11,14 +11,21 @@ revealOptions:
 ---
 
 <video autoplay="true" loop="true" muted="true" width="640">
-   <source src="rendered/superflip.mp4" type="video/mp4">
+   <source src="rendered/2020-05-23.superflip.mp4" type="video/mp4">
    Your browser does not support the video tag.
 </video>
 
 ---
 
 <video autoplay="true" loop="true" muted="true" width="640">
-   <source src="rendered/chaotikum-fail.mp4" type="video/mp4">
+   <source src="rendered/2020-05-26.enthusiasticon.27.mp4" type="video/mp4">
+   Your browser does not support the video tag.
+</video>
+
+---
+
+<video autoplay="true" loop="true" muted="true" width="640">
+   <source src="rendered/2020-05-25.chaotikum.mp4" type="video/mp4">
    Your browser does not support the video tag.
 </video>
 
