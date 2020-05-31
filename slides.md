@@ -40,6 +40,11 @@ revealOptions:
 
 <!-- 1 min: what is a permutation -->
 
+- We shuffle things around like `(2 1 3)`
+- There is a neutral permutation
+- There is an inverse permutation
+- Permutations can be combined into new ones
+
 ---
 
 <!-- 1 min: permutations expose a dualism of data and function -->
