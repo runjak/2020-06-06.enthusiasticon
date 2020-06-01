@@ -3,7 +3,7 @@ title: Permuting the cube
 separator: ---
 verticalSeparator: -v-
 revealOptions:
-  transition: 'slide'
+  transition: 'none'
 ---
 
 # Permuting the cube
