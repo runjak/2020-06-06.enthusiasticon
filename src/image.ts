@@ -1,6 +1,7 @@
 import { promises as fsPromises } from "fs";
+const { readFile, writeFile } = fsPromises;
 import { PNG } from "pngjs";
-import { applyPaletteSync, utils } from "image-q";
+import { applyPaletteSync, utils, ImageQuantization } from "image-q";
 import { Color, placeTopColors, solvedColors } from "./colors";
 import { PermutationName } from "./permutations";
 
@@ -21,8 +22,6 @@ cubePalette.add(blue);
 cubePalette.add(orange);
 cubePalette.add(yellow);
 
-const { readFile, writeFile } = fsPromises;
-
 const isPoint = (
   point: utils.Point,
   r: number,
@@ -33,7 +32,7 @@ const isPoint = (
 const toColors = (
   data: Uint8Array,
   width: number,
-  height: number
+  height: number // FIXME I think we can simplify arguments here
 ): Array<Color> => {
   let colors: Array<Color> = [];
 
@@ -61,23 +60,63 @@ const toColors = (
   return colors;
 };
 
-export type Quantified = { data: Array<Color>; width: number; height: number };
+const quantizations: Array<ImageQuantization> = [
+  "nearest",
+  "riemersma",
+  "floyd-steinberg",
+  "false-floyd-steinberg",
+  "stucki",
+  "atkinson",
+  "jarvis",
+  "burkes",
+  "sierra",
+  "two-sierra",
+  "sierra-lite",
+];
 
-export const quantify = (rawPng: Buffer): Quantified => {
+export const quantify = async (sourceFile: string): Promise<void> => {
+  const matches = sourceFile.match(/^(.+)\.png$/);
+
+  if (!matches) {
+    throw new Error(
+      `Unexpected sourceFile name does not end with '.png': '${sourceFile}'`
+    );
+  }
+  const filePrefix = matches[1];
+
+  const rawPng = await readFile(sourceFile);
   const { data, width, height } = PNG.sync.read(rawPng);
-  const inPointContainer = PointContainer.fromUint8Array(data, width, height);
-  const outPointContainer = applyPaletteSync(inPointContainer, cubePalette);
 
-  return {
-    width,
-    height,
-    data: toColors(outPointContainer.toUint8Array(), width, height),
-  };
+  await Promise.all(
+    quantizations.map(async (imageQuantization) => {
+      const inPointContainer = PointContainer.fromUint8Array(
+        data,
+        width,
+        height
+      );
+      const outPointContainer = applyPaletteSync(
+        inPointContainer,
+        cubePalette,
+        { imageQuantization }
+      );
+
+      const targetFile = `${filePrefix}.${imageQuantization}.png`;
+      const png = new PNG({ width, height });
+      // @ts-ignore following image-q tutorial below
+      png.data = outPointContainer.toUint8Array();
+      console.log("writing file:", targetFile);
+      await writeFile(targetFile, PNG.sync.write(png));
+    })
+  );
 };
 
 export type Tile = { x: number; y: number; colors: Array<Color> };
 
-export const tile = ({ data, width, height }: Quantified): Array<Tile> => {
+export const tile = (
+  data: Array<Color>,
+  width: number,
+  height: number
+): Array<Tile> => {
   let tiles: Array<Tile> = [];
 
   for (let y = 0; y + 3 <= height; y += 3) {
@@ -96,6 +135,11 @@ export const tile = ({ data, width, height }: Quantified): Array<Tile> => {
   return tiles;
 };
 
+export const tilePng = (rawPng: Buffer): Array<Tile> => {
+  const { data, width, height } = PNG.sync.read(rawPng);
+  return tile(toColors(new Uint8Array(data), width, height), width, height);
+};
+
 export type ImageCube = {
   x: number;
   y: number;
@@ -111,7 +155,7 @@ export const imageToAnimation = (
   keyDelta: number,
   startColors: (x: number, y: number) => Array<Color>
 ): Animation => {
-  const tiles = tile(quantify(rawPng));
+  const tiles = tilePng(rawPng);
   const cubes = tiles.map(({ x, y, colors }) => ({
     x,
     y,

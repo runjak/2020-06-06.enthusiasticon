@@ -10,7 +10,8 @@
     "test": "./node_modules/.bin/jest",
     "prettier": "./node_modules/.bin/prettier --write src",
     "build": "./node_modules/.bin/tsc",
-    "animateImage": "node dist/animateImage.js",
+    "animate": "node dist/commands/animate.js",
+    "quantify": "node dist/commands/quantify.js",
     "mkBlend": "blender --background blender/template.blend --python blender/rotations.py --"
   },
   "dependencies": {

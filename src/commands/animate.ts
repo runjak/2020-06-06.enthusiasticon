@@ -1,4 +1,4 @@
-import { animateSingleImage } from "./image";
+import { animateSingleImage } from "../image";
 
 // ignoring node and name of file in argv:
 const [, , sourceImage] = process.argv;
