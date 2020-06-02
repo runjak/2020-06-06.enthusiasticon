@@ -29,15 +29,10 @@ const isPoint = (
   b: number
 ): boolean => point.r === r && point.g === g && point.b === b;
 
-const toColors = (
-  data: Uint8Array,
-  width: number,
-  height: number // FIXME I think we can simplify arguments here
-): Array<Color> => {
+const toColors = (data: Uint8Array): Array<Color> => {
   let colors: Array<Color> = [];
 
-  const maxIndex = Math.min(width * height * 4, data.length);
-  for (let i = 0; i < maxIndex; i += 4) {
+  for (let i = 0; i < data.length; i += 4) {
     const [r, g, b] = data.slice(i, i + 3);
 
     if (isPoint(white, r, g, b)) {
@@ -137,7 +132,7 @@ export const tile = (
 
 export const tilePng = (rawPng: Buffer): Array<Tile> => {
   const { data, width, height } = PNG.sync.read(rawPng);
-  return tile(toColors(new Uint8Array(data), width, height), width, height);
+  return tile(toColors(new Uint8Array(data)), width, height);
 };
 
 export type ImageCube = {
