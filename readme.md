@@ -7,6 +7,56 @@ This Repo is the designated location for my talk proposal and subsequent materia
 The [CfP](https://www.enthusiasticon.de/cfp/) was extended to `2020-05-03`,
 and I've handed in a [proposal](proposal.md) to it.
 
+## Usage
+
+Below are some things I like to do with the code in this repo:
+
+### Dependencies
+
+* Some of the code is typescript and to be used with node.
+  * I like using `yarn`, but `npm` should work just as well.
+  * Run `yarn install; yarn build` to install dependencies and compile
+    * You could also run this with `ts-node`, but it's a bit more resource hungry.
+* To render animations blender and python are used.
+
+### Converting and resizing
+
+The node portion of code deals with `.png` images exclusively
+and works on the assumption that images are already of the desired size.
+I like to use the `convert` tool that comes with
+[ImageMagick](https://imagemagick.org/index.php) to convert and resize images:
+`convert $input --resize 48x48 output.png`
+
+The scripts truncate images to the highest multiple of `3` in each dimension.
+Images don't have to be square or of a specific size.
+It's just that larger sizes imply bigger computational work and file sizes.
+
+### Image Quantization
+
+The scripts make use of the [image-q](https://github.com/ibezkrovnyi/image-quantization)
+library to reduce the color palette so that it fits the 6 colors of our cubes.
+
+Execution of `yarn quantify test.png` will result in the creation of several
+quantified images in the same place as `test.png`,
+but with the specific quantization in the file name, such as `test.floyd-steinberg.png`.
+
+### Animation JSON
+
+Call of `yarn animate test.floyd-steinberg.png` will result in a `test.floyd-steinberg.json`
+that contains animations for the cubes.
+The `animate` script works on the assumption that the image was quantized before.
+
+### Creating a blend file
+
+Call of `yarn mkBlend test.floyd-steinberg.json blender/test.blend` will result
+in execution of the `blender/rotations.py` script in blender
+using the `template.blend` as the template for our cube.
+
+The resulting `blender/test.blend` file can be rendered and used with blender regularly.
+For example I like rendering headless with `blender --background test.blend -a`.
+The `template.blend` is set to render a `.mp4` and save it in `/tmp/`,
+which is copied over to the `test.blend`, but can of course be adjusted at will.
+
 ## Sources
 
 I'm trying to keep track of sources I've used to at least some extend:
