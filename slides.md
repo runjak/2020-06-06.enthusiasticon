@@ -18,11 +18,11 @@ revealOptions:
 
 -v-
 
-* Twisting, restickering and permutations are the same creature
+<img src="assets/photos/meta-magical.jpg" style="border:none; margin: 0; height: 600px;" />
 
 -v-
 
-<img src="assets/photos/meta-magical.jpg" style="border:none; margin: 0; height: 600px;" />
+<img src="assets/photos/stickered.jpg" style="border:none; margin: 0; height: 600px;" />
 
 ---
 
@@ -43,7 +43,9 @@ revealOptions:
 <ul>
    <li>$S_n$ - for example $S_3$</li>
    <li class="fragment">$$id = \begin{pmatrix}1&2&3\end{pmatrix}$$</li>
-   <li class="fragment">$$a=\begin{pmatrix}2 & 3 & 1\end{pmatrix}\rightarrow a^{-1}=\begin{pmatrix}3 & 1 & 2\end{pmatrix}$$</li>
+   <li class="fragment">$$a=\begin{pmatrix}2 & 3 & 1\end{pmatrix}$$</li>
+   <li class="fragment">$$a^{-1}=\begin{pmatrix}3 & 1 & 2\end{pmatrix}$$</li>
+   <li class="fragment">$$a\cdot a^{-1}=id$$</li>
 </ul>
 
 ---
