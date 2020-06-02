@@ -1,4 +1,4 @@
-import { readFile as readFileCb, writeFile as writeFileCb } from "fs";
+import { promises as fsPromises } from "fs";
 import { PNG } from "pngjs";
 import { applyPaletteSync, utils } from "image-q";
 import { Color, placeTopColors, solvedColors } from "./colors";
@@ -21,27 +21,7 @@ cubePalette.add(blue);
 cubePalette.add(orange);
 cubePalette.add(yellow);
 
-export const readFile = (file: string): Promise<Buffer> =>
-  new Promise((resolve, reject) => {
-    readFileCb(file, (err, data) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(data);
-      }
-    });
-  });
-
-export const writeFile = (file: string, data: object): Promise<void> =>
-  new Promise((resolve, reject) => {
-    writeFileCb(file, JSON.stringify(data), (err) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve();
-      }
-    });
-  });
+const { readFile, writeFile } = fsPromises;
 
 const isPoint = (
   point: utils.Point,
@@ -151,5 +131,5 @@ export const animateSingleImage = async (
     console.log(`startCube for (${x}, ${y})`);
     return solvedColors;
   });
-  await writeFile(target, animation);
+  await writeFile(target, JSON.stringify(animation));
 };
