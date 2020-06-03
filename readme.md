@@ -19,6 +19,10 @@ Below are some things I like to do with the code in this repo:
     * You could also run this with `ts-node`, but it's a bit more resource hungry.
 * To render animations blender and python are used.
 
+### Slides
+
+Use `yarn slides` to view the slides from the talk.
+
 ### Converting and resizing
 
 The node portion of code deals with `.png` images exclusively
