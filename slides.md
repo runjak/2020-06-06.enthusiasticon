@@ -42,10 +42,10 @@ revealOptions:
 
 <ul>
    <li>$S_n$ - for example $S_3$</li>
-   <li class="fragment">$$id = \begin{pmatrix}1&2&3\end{pmatrix}$$</li>
+   <li class="fragment">$$id = \begin{pmatrix}1 & 2 & 3\end{pmatrix}$$</li>
    <li class="fragment">$$a=\begin{pmatrix}2 & 3 & 1\end{pmatrix}$$</li>
    <li class="fragment">$$a^{-1}=\begin{pmatrix}3 & 1 & 2\end{pmatrix}$$</li>
-   <li class="fragment">$$a\cdot a^{-1}=id$$</li>
+   <li class="fragment">$$a\cdot a^{-1} = id$$</li>
 </ul>
 
 ---
@@ -55,6 +55,28 @@ revealOptions:
 ---
 
 <!-- 1 min: we can combine permutations to get new ones -->
+## Combining permutations
+
+* Let's use our previously stickered cube to make some notes!
+* We'll use these as building blocks!
+
+-v-
+
+### The X permutation
+
+<img src="assets/photos/x-perm.jpg" style="border:none; margin: 0; height: 600px;" />
+
+$\rightarrow$ We get $X^{-1}$, also written $X'$ from this ;)
+-v-
+
+### The Y permutation
+
+<img src="assets/photos/y-perm.jpg" style="border:none; margin: 0; height: 600px;" />
+-v-
+
+### The R permutation
+
+<img src="assets/photos/r-perm.jpg" style="border:none; margin: 0; height: 600px;" />
 
 ---
 
