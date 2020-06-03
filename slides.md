@@ -67,11 +67,23 @@ revealOptions:
 <img src="assets/photos/x-perm.jpg" style="border:none; margin: 0; height: 600px;" />
 
 $\rightarrow$ We get $X^{-1}$, also written $X'$ from this ;)
+
 -v-
 
 ### The Y permutation
 
 <img src="assets/photos/y-perm.jpg" style="border:none; margin: 0; height: 600px;" />
+
+-v-
+
+### The Z permutation
+
+* Let's just do this: $X\cdot Y\cdot X'$
+
+<video muted="true" width="640" controls>
+   <source src="assets/rendered/z-perm.webm" type="video/mp4">
+</video>
+
 -v-
 
 ### The R permutation
@@ -100,19 +112,19 @@ $\rightarrow$ We get $X^{-1}$, also written $X'$ from this ;)
 ---
 
 <video autoplay="true" loop="true" muted="true" width="640">
-   <source src="rendered/2020-05-23.superflip.mp4" type="video/mp4">
+   <source src="assets/rendered/2020-05-23.superflip.mp4" type="video/mp4">
 </video>
 
 ---
 
 <video autoplay="true" loop="true" muted="true" width="640">
-   <source src="rendered/2020-05-26.enthusiasticon.27.mp4" type="video/mp4">
+   <source src="assets/rendered/2020-05-26.enthusiasticon.27.mp4" type="video/mp4">
 </video>
 
 ---
 
 <video autoplay="true" loop="true" muted="true" width="640">
-   <source src="rendered/2020-05-25.chaotikum.mp4" type="video/mp4">
+   <source src="assets/rendered/2020-05-25.chaotikum.mp4" type="video/mp4">
 </video>
 
 ---
