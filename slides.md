@@ -90,6 +90,22 @@ $\rightarrow$ We get $X^{-1}$, also written $X'$ from this ;)
 
 <img src="assets/photos/r-perm.jpg" style="border:none; margin: 0; height: 600px;" />
 
+-v-
+
+### The F permutation
+
+* Let's just do this: $Z\cdot R\cdot Z'$
+
+<video muted="true" width="640" controls>
+   <source src="assets/rendered/f-perm.webm" type="video/mp4">
+</video>
+
+-v-
+
+### The whole bunch
+
+<img src="assets/carbon/permutations.png" style="border:none; margin: 0; height: 600px;" />
+
 ---
 
 <!-- 1 min: we can build rotations to orient the cube -->
