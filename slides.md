@@ -55,10 +55,13 @@ revealOptions:
 ---
 
 <!-- 1 min: we can combine permutations to get new ones -->
-## Combining permutations
 
-* Let's use our previously stickered cube to make some notes!
-* We'll use these as building blocks!
+<!-- 1 min: we can build rotations to orient the cube -->
+
+## Orienting the cube
+
+* Let's have some permutations to orient the cube
+* They're not a direct help, but can contribute
 
 -v-
 
@@ -84,11 +87,25 @@ $\rightarrow$ We get $X^{-1}$, also written $X'$ from this ;)
    <source src="assets/rendered/z-perm.webm" type="video/mp4">
 </video>
 
+---
+
+<!-- 2 min: we can bootstrap lots of permutations from only a handful -->
+
+## Rotations on the cube
+
+* We need one more permutation
+
 -v-
 
 ### The R permutation
 
 <img src="assets/photos/r-perm.jpg" style="border:none; margin: 0; height: 600px;" />
+
+-v-
+
+### The R permutation
+
+<img src="assets/r-perm.png" style="border:none; margin: 0; height: 600px;" />
 
 -v-
 
@@ -105,14 +122,6 @@ $\rightarrow$ We get $X^{-1}$, also written $X'$ from this ;)
 ### The whole bunch
 
 <img src="assets/carbon/permutations.png" style="border:none; margin: 0; height: 600px;" />
-
----
-
-<!-- 1 min: we can build rotations to orient the cube -->
-
----
-
-<!-- 2 min: we can bootstrap lots of permutations from only a handful -->
 
 ---
 
