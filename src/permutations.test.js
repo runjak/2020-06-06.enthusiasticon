@@ -16,13 +16,13 @@ describe("permutations", () => {
   describe("group laws", () => {
     const reverse = [...id].reverse();
 
-    it("it should have id as a left-combining identity element", () => {
+    it("should have id as a left-combining identity element", () => {
       const actual = combine(id, reverse);
 
       expect(actual).toEqual(reverse);
     });
 
-    it("it should have id as a right-combining identity element", () => {
+    it("should have id as a right-combining identity element", () => {
       const actual = combine(reverse, id);
 
       expect(actual).toEqual(reverse);
