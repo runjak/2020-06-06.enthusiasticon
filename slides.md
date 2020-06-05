@@ -10,8 +10,6 @@ revealOptions:
 
 ---
 
-<!-- 1 min: Opening -->
-
 ## Hi - I like cubes 👋
 
 <img src="assets/photos/title-page.jpg" style="border:none; margin: 0; height: 600px;" />
@@ -21,12 +19,6 @@ revealOptions:
 <img src="assets/photos/meta-magical.jpg" style="border:none; margin: 0; height: 600px;" />
 
 -v-
-
-<img src="assets/photos/stickered.jpg" style="border:none; margin: 0; height: 600px;" />
-
----
-
-<!-- 1 min: what is a permutation -->
 
 ## Permutations
 
@@ -41,24 +33,31 @@ revealOptions:
 ### The symmetric group
 
 <ul>
-   <li>$S_n$ - for example $S_3$</li>
-   <li class="fragment">$$id = \begin{pmatrix}1 & 2 & 3\end{pmatrix}$$</li>
-   <li class="fragment">$$a=\begin{pmatrix}2 & 3 & 1\end{pmatrix}$$</li>
-   <li class="fragment">$$a^{-1}=\begin{pmatrix}3 & 1 & 2\end{pmatrix}$$</li>
-   <li class="fragment">$$a\cdot a^{-1} = id$$</li>
+   <li>$S_n$ - in this case $S_{54}$</li>
+   <li class="fragment">identity</li>
+   <li class="fragment">inverse</li>
+   <li class="fragment">they combine</li>
 </ul>
 
+-v-
+
+<img src="assets/photos/stickered.jpg" style="border:none; margin: 0; height: 600px;" />
+
 ---
 
-<!-- 1 min: permutations expose a dualism of data and function -->
+### The R permutation
 
----
+<img src="assets/photos/r-perm.jpg" style="border:none; margin: 0; height: 600px;" />
 
-<!-- 1 min: we can combine permutations to get new ones -->
+-v-
 
-<!-- 1 min: we can build rotations to orient the cube -->
+### The R permutation
 
-## Orienting the cube
+<img src="assets/r-perm.png" style="border:none; margin: 0; height: 600px;" />
+
+-v-
+
+### Orienting the cube
 
 * Let's have some permutations to orient the cube
 * They're not a direct help, but can contribute
@@ -87,26 +86,6 @@ $\rightarrow$ We get $X^{-1}$, also written $X'$ from this ;)
    <source src="assets/rendered/z-perm.webm" type="video/mp4">
 </video>
 
----
-
-<!-- 2 min: we can bootstrap lots of permutations from only a handful -->
-
-## Rotations on the cube
-
-* We need one more permutation
-
--v-
-
-### The R permutation
-
-<img src="assets/photos/r-perm.jpg" style="border:none; margin: 0; height: 600px;" />
-
--v-
-
-### The R permutation
-
-<img src="assets/r-perm.png" style="border:none; margin: 0; height: 600px;" />
-
 -v-
 
 ### The F permutation
@@ -126,9 +105,59 @@ $\rightarrow$ We get $X^{-1}$, also written $X'$ from this ;)
 ---
 
 <!-- 2 min: solving a rubiks cube -->
-* each position of a cube is itself a permutation
+## Towards solving
+
+* each shuffle of a cube corresponds to a permutation
 * we search for a sequence of permutations that combines to the solution
-* This can be visualised as the exploration of a graph or generating elements from a group
+
+-v-
+
+### example shuffle
+
+Let's take an example:
+
+$$
+S = L\cdot D\cdot L'\cdot D'\cdot L\cdot D\cdot L'
+$$
+
+and it's inverse:
+
+$$
+S' = L\cdot D'\cdot L'\cdot D\cdot L\cdot D'\cdot L'
+$$
+
+-v-
+
+what $S$ looks like:<br />
+$S = L\cdot D\cdot L'\cdot D'\cdot L\cdot D\cdot L'$
+
+<video muted="true" width="640" controls>
+   <source src="assets/rendered/shuffle-1.webm" type="video/mp4">
+</video>
+
+-v-
+
+Let's add a $U$:<br />
+$S\cdot U$
+
+<video muted="true" width="640" controls>
+   <source src="assets/rendered/shuffle-2.webm" type="video/mp4">
+</video>
+
+-v-
+
+And back again:<br />
+$S\cdot U \cdot S'\cdot U'$
+
+<video muted="true" width="640" controls>
+   <source src="assets/rendered/shuffle-3.webm" type="video/mp4">
+</video>
+
+-v-
+
+### we got us a commutator
+
+<img src="assets/photos/commutator.jpg" style="border:none; margin: 0; height: 600px;" />
 
 ---
 
