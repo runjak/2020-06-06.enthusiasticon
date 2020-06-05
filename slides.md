@@ -160,7 +160,7 @@ $S\cdot U \cdot S'\cdot U'$
 
 ---
 
-<video autoplay="true" muted="true" width="640">
+<video muted="true" width="640" controls>
    <source src="assets/rendered/2020-05-26.enthusiasticon.27.mp4" type="video/mp4">
 </video>
 
