@@ -21,7 +21,7 @@ Below are some things I like to do with the code in this repo:
 
 ### Slides
 
-Use `yarn slides` to view the slides from the talk.
+Use `yarn slides` to view the slides of the talk.
 
 ### Converting and resizing
 
