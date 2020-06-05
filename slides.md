@@ -16,7 +16,8 @@ revealOptions:
 
 -v-
 
-<img src="assets/photos/meta-magical.jpg" style="border:none; margin: 0; height: 600px;" />
+<img src="assets/photos/meta-magical.jpg" style="border:none; margin: 0; height: 600px;" /><br />
+[Metamagical Themas](https://en.wikipedia.org/wiki/Metamagical_Themas) - [D. Hofstadter](https://en.wikipedia.org/wiki/Douglas_Hofstadter)
 
 -v-
 
