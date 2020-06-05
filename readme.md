@@ -75,6 +75,7 @@ I'm trying to keep track of sources I've used to at least some extend:
 * [Ruwix: Twisty Puzzles](https://ruwix.com/twisty-puzzles/)
 * YouTube
   * [Cycle notation of permutations](https://www.youtube.com/watch?v=MpKG6FmcIHk)
+  * [Matt Parker on impossible Rubiks Cubes](https://www.youtube.com/watch?v=PLAFNvxDPMw)
 * Ruwix:
   * [Rubik's cube notation](https://ruwix.com/the-rubiks-cube/notation/)
   * [Advanced Rubik's cube notation](https://ruwix.com/the-rubiks-cube/notation/advanced/)
@@ -88,7 +89,6 @@ I'm trying to keep track of sources I've used to at least some extend:
 I've tweeted about related topics in the past
 and use this list to find my old tweets again:
 
-* [Matt Parker on impossible Rubiks Cubes](https://twitter.com/sicarius/status/954419793125412864)
 * [Happy about holding my current cube in hands the first time](https://twitter.com/sicarius/status/981664903877578752)
 * [Permuting some bs on a 7x7x7 cube](https://twitter.com/sicarius/status/1017447426679083008)
 * [1/3 of a receiving a bunch of cubes](https://twitter.com/sicarius/status/1019542554784694273)
