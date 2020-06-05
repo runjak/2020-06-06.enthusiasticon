@@ -104,7 +104,6 @@ $\rightarrow$ We get $X^{-1}$, also written $X'$ from this ;)
 
 ---
 
-<!-- 2 min: solving a rubiks cube -->
 ## Towards solving
 
 * each shuffle of a cube corresponds to a permutation
@@ -161,26 +160,14 @@ $S\cdot U \cdot S'\cdot U'$
 
 ---
 
-<!-- 1 min: search space is large, but we can build partial solutions -->
-
----
-
-<video autoplay="true" loop="true" muted="true" width="640">
-   <source src="assets/rendered/2020-05-23.superflip.mp4" type="video/mp4">
-</video>
-
----
-
-<video autoplay="true" loop="true" muted="true" width="640">
+<video autoplay="true" muted="true" width="640">
    <source src="assets/rendered/2020-05-26.enthusiasticon.27.mp4" type="video/mp4">
 </video>
 
 ---
 
-<video autoplay="true" loop="true" muted="true" width="640">
-   <source src="assets/rendered/2020-05-25.chaotikum.mp4" type="video/mp4">
-</video>
+## Thanks for having me
 
----
-
-Slides: [github.com/runjak/2020-06-06.enthusiasticon](https://github.com/runjak/2020-06-06.enthusiasticon)
+* Slides: [github.com/runjak/2020-06-06.enthusiasticon](https://github.com/runjak/2020-06-06.enthusiasticon)
+* Twitter: [@sicarius](https://twitter.com/sicarius)
+* Happy to chat on zulip 🐋✨
