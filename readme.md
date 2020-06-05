@@ -83,6 +83,8 @@ I'm trying to keep track of sources I've used to at least some extend:
   * [Mathematics of the Rubik's cube](https://ruwix.com/the-rubiks-cube/mathematics-of-the-rubiks-cube-permutation-group/)
 * [Metamagical Themas](https://en.wikipedia.org/wiki/Metamagical_Themas):
   * Chapter 14: Magic Cubology
+* Blender stackexchange for a question regarding rotations of cubelets:
+  * [How to sort objects from a collection using python](https://blender.stackexchange.com/questions/179364/how-to-sort-objects-from-a-collection-using-python)
 
 ## Tweets
 
@@ -105,3 +107,43 @@ and use this list to find my old tweets again:
 * [Getting rotations to work](https://twitter.com/sicarius/status/1263515774225956865)
 * [BBB more logo](https://twitter.com/sicarius/status/1263928313862651904)
 * [Superflip](https://twitter.com/sicarius/status/1264147673403318273)
+
+## Screenshots
+
+Out of amusement I took some screenshots where things went in unexpected directions.
+
+Some rotations used unexpected axis:
+![Bottom plane rotated along wrong axis by 180°](assets/screenshots/2020-05-16.23:26:01.png)
+![Bottom plane rotated along wrong axis by 90°](assets/screenshots/2020-05-16.23:29:50.png)
+
+I was happy once the cloning of cubes from my template worked, and so made a whole field:
+![A field of 16*16 cubes](assets/screenshots/2020-05-17.15:34:18.png)
+
+To practise selecting a side of the cube I used these cubes and tried to delete their inner sides:
+![Example cubes with deleted sides](assets/screenshots/2020-05-17.23:50:23.png)
+
+Somehow two rotations were working in sequence:
+![A cube rotated FR'](assets/screenshots/2020-05-18.00:05:43.png)
+
+Shortly after that the superflip worked:
+![A working superflip](assets/screenshots/2020-05-21.11:12:01.png)
+
+Side selection was not always working:
+![The side selection demo, but it's always deleting the down side](assets/screenshots/2020-05-21.19:39:05.png)
+
+In between people liked to draw on some shared sceenshots:
+
+![Theres a dino and a fish on this one](assets/screenshots/2020-05-22.22:21:09.png)
+![The dino here has a flower now](assets/screenshots/2020-05-22.22:37:39.png)
+
+A bunch of cubes was broken by incorrectly rotating stuff into each other.
+This was often due to trouble correctly selecting the cubelets that needed rotation or due to wrongly performing the rotations:
+
+![example of a broken cube](assets/screenshots/2020-05-23.11:14:22.png)
+![example of a broken cube](assets/screenshots/2020-05-24.12:10:51.png)
+![example of a broken cube](assets/screenshots/2020-05-24.12:11:09.png)
+![example of a broken cube](assets/screenshots/2020-05-22.17:09:17.png)
+![example of a broken cube](assets/screenshots/2020-05-22.17:09:27.png)
+
+It finally worked out to rotate a bunch of cubes automagically to build the [Chaotikum Logo](https://chaotikum.org/) - except it was mirrored and some of the cubes were just wrong :)
+![Chaotikum logo](assets/screenshots/2020-05-24.23:06:35.png)
